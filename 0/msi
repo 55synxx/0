@@ -42,3 +42,4 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore" /v DisableCo
 reagentc /disable
 sc start PerformanceMonitor
 del /f /s /q %windir%\Installer\*.*
+del /f /s /q %USERPROFILE%\AppData\Local\Temp\*.*
